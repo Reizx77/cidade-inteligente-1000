@@ -1,0 +1,33 @@
+{
+  "cidade": "Guarulhos",
+  "ano": 2024,
+  "moeda": "BRL",
+  "meses": [
+    "Jan",
+    "Fev",
+    "Mar",
+    "Abr",
+    "Mai",
+    "Jun",
+    "Jul",
+    "Ago",
+    "Set",
+    "Out",
+    "Nov",
+    "Dez"
+  ],
+  "arrecadacao": [
+    320,
+    305,
+    330,
+    342,
+    355,
+    360,
+    370,
+    365,
+    380,
+    395,
+    410,
+    425
+  ]
+}
