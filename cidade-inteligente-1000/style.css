@@ -1,0 +1,115 @@
+/* Tema escuro com acentos que combinam com preto */
+:root{
+  --bg:#0b0f14;
+  --panel:#0f141b;
+  --ink:#e6e8ea;
+  --muted:#9aa4af;
+  --accent:#20e3ff; /* ciano que contrasta bem no preto */
+  --accent-2:#5eead4; /* água-marinha para estados */
+  --shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial}
+
+.topbar{
+  position:sticky;top:0;background:rgba(11,15,20,.75);
+  backdrop-filter:saturate(1.2) blur(8px);
+  border-bottom:1px solid #111;z-index:10
+}
+.topbar .brand{display:flex;align-items:center;gap:10px;padding:14px 20px}
+.topbar .dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--accent), #0086a5)}
+.topbar h1{font-size:18px;margin:0}
+.menu{display:flex;gap:14px;padding:0 20px 14px 20px;flex-wrap:wrap}
+.menu a{color:var(--accent);text-decoration:none;font-weight:600;opacity:.9}
+.menu a:hover{opacity:1;text-decoration:underline}
+
+main{width:95%;max-width:1200px;margin:24px auto}
+
+.card{
+  background: linear-gradient(180deg, #101820, #0b0f14);
+  border: 1px solid #1e293b;
+  border-radius:14px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 20px rgba(0,0,0,.5);
+}
+
+.card h3,.card h2{margin:4px 0 6px}
+.sub{color:var(--muted);margin:0 0 12px}
+.center{text-align:center}
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card-grid .wide{grid-column:1 / -1}
+@media (max-width:860px){.card-grid{grid-template-columns:1fr}}
+
+.clima{display:flex;flex-wrap:wrap;gap:10px}
+.pill{background:#0a1117;border:1px solid #101826;border-radius:999px;padding:8px 12px;color:#cfe8f1}
+
+.tabela{display:grid;gap:8px}
+.thead,.trow{display:grid;grid-template-columns:2fr 1.2fr 1.2fr 1fr;gap:10px;align-items:center}
+.thead{color:#94a3b8}
+.badge{padding:6px 10px;border-radius:999px;background:#0a1620;border:1px solid #0e2230;color:#bfefff;font-weight:700;justify-self:start}
+.badge.exec{background:rgba(32,227,255,.1);border-color:#0aaec5}
+.badge.plan{background:rgba(94,234,212,.08);border-color:#2bb39a;color:#ccfff2}
+.badge.done{background:rgba(34,197,94,.08);border-color:#16a34a;color:#d1fae5}
+
+.historico{padding-bottom:26px}
+.links{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.btn{background:var(--accent);color:#001015;font-weight:700;text-decoration:none;padding:8px 12px;border-radius:10px}
+.btn:hover{filter:brightness(1.05)}
+
+.foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 20px;border-top:1px solid #0f1822;color:#9fb0bf}
+
+/* Conversa & Problemas */
+.conversa-form{display:grid;grid-template-columns:1fr 200px;gap:10px;margin:10px 0}
+.conversa-form #mensagem{grid-column:1 / -1;resize:vertical;background:#0a1117;border:1px solid #101826;border-radius:10px;padding:10px;color:#cfe8f1}
+.conversa-form input,.conversa-form select{background:#0a1117;border:1px solid #101826;border-radius:10px;padding:10px;color:#cfe8f1}
+.conversa-form .btn{grid-column:1 / -1;justify-self:start}
+.conversa-lista{display:grid;gap:10px;margin-top:10px}
+.item-msg{background:#091018;border:1px solid #0e1824;border-radius:12px;padding:10px}
+.item-msg .meta{color:#88a; font-size:.85rem; margin-bottom:4px}
+
+/* Guia */
+.guia-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (max-width:860px){.guia-grid{grid-template-columns:1fr}}
+.guia-card{background:#0b121a;border:1px solid #122030;border-radius:12px;padding:12px}
+
+/* Impostos chart tweaks */
+#graficoImpostos{margin-top:14px}
+
+.info{display:inline-block;margin-left:6px;cursor:help;opacity:.85}
+.info:hover{opacity:1;filter:drop-shadow(0 0 4px rgba(32,227,255,.8))}
+#graficoImpostosAnual,#graficoImpostosBreakdown{margin-top:12px}
+.api-link{color:var(--accent);text-decoration:none;font-weight:700}
+.api-link:hover{text-decoration:underline}
+
+.pillstat{
+  margin-left:12px;
+  background:#0a1117;
+  border:1px solid #101826;
+  border-radius:999px;
+  padding:6px 10px;
+  color:#cfe8f1;
+  font-size:.9rem;
+  font-weight: 600;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: .6 }
+  50% { opacity: 1 }
+  100% { opacity: .6 }
+}
+
+@media (max-width: 600px) {
+  canvas { 
+    max-width: 100%;
+    height: auto !important;
+  }
+}

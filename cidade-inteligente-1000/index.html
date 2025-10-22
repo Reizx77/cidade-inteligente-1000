@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cidade Inteligente 1000 — Painel SP</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span id="apiStatus" class="api-status pillstat">⏳ verificando API...</span>
+      <span class="dot"></span>
+      <h1>Cidade Inteligente 1000 — SP</h1>
+    </div>
+    <nav class="menu">
+      <a href="#desafio">Desafio (GranDSI-BR)</a>
+      <a href="#painel">Painel</a>
+      <a href="#mapa">Mapa</a>
+      <a href="#participacao">Participação</a>
+      <a href="#historico">Histórico</a>      <a href="historico.html">Histórico (Página Completa)</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="painel" class="card-grid">
+      <article class="card">
+        <h3>Ar: PM2.5 por estação (µg/m³) <span class="info" title="Partículas finas com alto impacto respiratório; quanto menor, melhor.">ℹ️</span></h3>
+        <p class="sub">Fonte: OpenAQ — dados simulados por região</p>
+        <canvas id="pm25PorEstacao"></canvas>
+      </article>
+
+      <article class="card">
+        <h3>Ar: PM10 por estação (µg/m³) <span class="info" title="Partículas inaláveis maiores (poeira/fumaça); quanto menor, melhor.">ℹ️</span></h3>
+        <p class="sub">Fonte: OpenAQ — dados simulados por região</p>
+        <canvas id="pm10PorEstacao"></canvas>
+      </article>
+
+      <article class="card wide">
+        <h3>Clima atual <span class="info" title="Temperatura, sensação, umidade e vento influenciam dispersão de poluentes.">ℹ️</span></h3>
+        <p class="sub">Fonte: Open‑Meteo</p>
+        <div id="climaAtual" class="clima">
+          <div class="pill">Temperatura: <strong id="temp">--</strong></div>
+          <div class="pill">Sensação: <strong id="sensacao">--</strong></div>
+          <div class="pill">Umidade: <strong id="umidade">--</strong></div>
+          <div class="pill">Vento: <strong id="vento">--</strong></div>
+        </div>
+      </article>
+
+      <article class="card wide">
+        <h3>Portal de Transparência (simulado)</h3>
+        <div class="tabela">
+          <div class="thead">
+            <span>Projeto</span><span>Órgão</span><span>Orçamento (R$)</span><span>Status</span>
+          </div>
+          <div class="trow"><span>Corredor de Ônibus Verde</span><span>Mobilidade</span><span>3.500.000</span><span class="badge exec">Em execução</span></div>
+          <div class="trow"><span>Placas Solares em Escolas</span><span>Energia</span><span>2.100.000</span><span class="badge plan">Planejado</span></div>
+          <div class="trow"><span>Sensores de Qualidade do Ar</span><span>Meio Ambiente</span><span>950.000</span><span class="badge done">Concluído</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="historico" class="historico card">
+      <h2>🌎 Qualidade do Ar — PM2.5 e PM10</h2>
+      <p class="sub center">Fonte: Open‑Meteo Air Quality (requisição real). Se indisponível, caímos para dados simulados.</p>
+      <canvas id="graficoHistorico"></canvas>
+
+      <div class="links">
+        <a class="btn btn-historico-page" href="historico.html">📈 Ver gráfico histórico completo</a>
+        <a class="btn" href="https://openaq.org" target="_blank" rel="noopener">🌎 Ver dados do OpenAQ</a>
+        <a class="btn" href="https://open-meteo.com" target="_blank" rel="noopener">🌬️ Ver API Open‑Meteo</a>
+      </div>
+    </section>
+
+    <section id="desafio" class="card">
+      <h2>🧩 Alinhamento ao Desafio (I GranDSI‑BR 2016–2026)</h2>
+      <p>Este painel aborda os temas de <strong>sistemas inteligentes</strong>, <strong>dados abertos</strong>, <strong>transparência</strong> e <strong>visão sociotécnica</strong> ao:</p>
+      <ul>
+        <li>Consumir <em>APIs públicas</em> (Open‑Meteo e OpenAQ) para expor indicadores ambientais.</li>
+        <li>Oferecer visualizações acessíveis para apoio a decisões urbanas.</li>
+        <li>Simular um portal de transparência de projetos sustentáveis.</li>
+      </ul>
+    </section>
+  
+    <section id="participacao" class="card wide">
+      <h2>🗣️ Conversa & Problemas da Cidade</h2>
+      <p class="sub">Use este espaço para registrar <strong>problemas observados</strong> (ex.: buracos, iluminação, lixo, poluição, transporte) e sugerir soluções. As mensagens ficam salvas no seu navegador.</p>
+      <form id="formConversa" class="conversa-form">
+        <input type="text" id="nome" placeholder="Seu nome (opcional)" />
+        <select id="tema">
+          <option value="Transporte">Transporte</option>
+          <option value="Iluminação">Iluminação</option>
+          <option value="Resíduos">Resíduos</option>
+          <option value="Verde/Parques">Verde/Parques</option>
+          <option value="Segurança">Segurança</option>
+          <option value="Qualidade do ar">Qualidade do ar</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <textarea id="mensagem" rows="3" placeholder="Descreva o problema e uma ideia de solução..."></textarea>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+      <div id="listaConversa" class="conversa-lista"></div>
+    </section>
+
+    <section id="impostos" class="card wide">
+      <h2>💰 Transparência de Impostos (API) <span class="info" title="Arrecadação municipal por mês/ano. Fonte: Prefeitura de São Paulo.">ℹ️</span></h2>
+      <p class="sub">Arrecadação municipal <em>simulada via API local</em> (data/transparencia.json). Em produção, troque pelo endpoint oficial do portal da transparência da sua cidade/estado.</p>
+      <div class="links">
+        <a class="btn btn-historico-page" href="historico.html">📈 Ver gráfico histórico completo</a>
+        <a class="btn" href="https://portaldatransparencia.gov.br/" target="_blank" rel="noopener">🔗 Portal da Transparência</a>
+        <a class="btn" href="https://dados.gov.br/" target="_blank" rel="noopener">🗃️ Dados Abertos (Gov.br)</a>
+      </div>
+      <canvas id="graficoImpostos"></canvas>
+<div class="sub">📅 Evolução anual (2019–2024)</div>
+<canvas id="graficoImpostosAnual"></canvas>
+<div class="sub">🏷️ Breakdown por tributo (IPTU x ISS x Outros)</div>
+<canvas id="graficoImpostosBreakdown"></canvas>
+
+    </section>
+
+    <section id="guia" class="card wide">
+      <h2>📚 Guia do Site (Entenda em 1 Minuto)</h2>
+      <div class="guia-grid">
+        <div class="guia-card">
+          <h3>🌫️ PM2.5 e PM10</h3>
+          <p>Indicadores de <strong>poluição do ar</strong>. Valores maiores indicam pior qualidade. PM2.5 (partículas finas) afeta mais a saúde; PM10 são partículas maiores.</p>
+        </div>
+        <div class="guia-card">
+          <h3>🌦️ Clima atual</h3>
+          <p>Temperatura, sensação, umidade e vento via <strong>Open‑Meteo</strong>. Influenciam no conforto térmico e na dispersão de poluentes.</p>
+        </div>
+        <div class="guia-card">
+          <h3>📈 Histórico</h3>
+          <p>Evolução anual de PM2.5/PM10 (2019–2024) usando <strong>API de qualidade do ar</strong>. Ajuda a observar tendências e impacto de políticas públicas.</p>
+        </div>
+        <div class="guia-card">
+          <h3>🏛️ Transparência</h3>
+          <p>Gráfico de <strong>arrecadação de impostos</strong> para leitura rápida do ciclo de receitas. Permite cruzar com gastos e projetos.</p>
+        </div>
+        <div class="guia-card">
+          <h3>🗣️ Conversa Cidadã</h3>
+          <p>Espaço para <strong>relatar problemas</strong> e propor soluções. Os relatos ficam no seu navegador (localStorage) e podem ser exportados.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>© 2025 Cidade Inteligente 1000 • Guarulhos/SP</span>
+    <span>HTML • CSS • JavaScript • Chart.js • Open‑Meteo • OpenAQ</span>
+  <footer class="foot">
+  <span>© 2025 Cidade Inteligente 1000 • Guarulhos/SP</span>
+  <span>HTML • CSS • JavaScript • Chart.js • Open-Meteo • OpenAQ</span>
+  <a class="api-link" href="https://apilib.prefeitura.sp.gov.br/api/receita/arrecadacao" target="_blank" rel="noopener">📎 Ver dados brutos da Prefeitura (API)</a>
+</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
